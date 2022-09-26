@@ -1,0 +1,17 @@
+steps:
+  - name: 'us-east4-docker.pkg.dev/cft-cloudbuild-f6f8/cft-tf-runners/terraform:latest'
+    args:
+      -  -v
+  - name: 'us-east4-docker.pkg.dev/cft-cloudbuild-f6f8/cft-tf-runners/terraform:latest'
+    args:
+      - init
+    dir: envs/development/
+  - name: 'us-east4-docker.pkg.dev/cft-cloudbuild-f6f8/cft-tf-runners/terraform:latest'
+    args:
+      - validate
+    dir: envs/development/
+  - name: 'us-east4-docker.pkg.dev/cft-cloudbuild-f6f8/cft-tf-runners/terraform:latest'
+    args:
+      - plan
+    dir: envs/development/
+timeout: 3600s

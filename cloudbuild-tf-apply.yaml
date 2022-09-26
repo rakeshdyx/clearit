@@ -1,0 +1,27 @@
+steps:
+  - name: 'us-east4-docker.pkg.dev/cft-cloudbuild-f6f8/cft-tf-runners/terraform:latest'
+    args:
+      - 'init'
+    dir: 'envs/$BRANCH_NAME'
+  - name: 'us-east4-docker.pkg.dev/cft-cloudbuild-f6f8/cft-tf-runners/terraform:latest'
+    args:
+      - 'validate'
+    dir: 'envs/$BRANCH_NAME'
+  - name: 'us-east4-docker.pkg.dev/cft-cloudbuild-f6f8/cft-tf-runners/terraform:latest'
+    volumes:
+      - name: 'plans'
+        path: '/plans'
+    args:
+      - 'plan'
+      - '-out'
+      - '/plans/planfile'
+    dir: 'envs/$BRANCH_NAME'
+  - name: 'us-east4-docker.pkg.dev/cft-cloudbuild-f6f8/cft-tf-runners/terraform:latest'
+    volumes:
+      - name: 'plans'
+        path: '/plans'
+    args:
+      - 'apply'
+      - '/plans/planfile'
+    dir: 'envs/$BRANCH_NAME'
+timeout: 3600s
